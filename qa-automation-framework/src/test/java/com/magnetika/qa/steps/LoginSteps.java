@@ -3,6 +3,7 @@ package com.magnetika.qa.steps;
 import io.cucumber.java.en.*;
 import com.magnetika.qa.utils.DriverManager;
 import com.magnetika.qa.pages.LoginPage;
+import static org.junit.Assert.assertTrue;
 
 public class LoginSteps {
 
@@ -24,11 +25,14 @@ public class LoginSteps {
     }
 
     @Then("user should see the products page")
-    public void user_should_see_products_page() {
+public void user_should_see_products_page() {
 
-        String currentUrl = DriverManager.driver.getCurrentUrl();
-        System.out.println("Current URL: " + currentUrl);
+    String currentUrl = DriverManager.driver.getCurrentUrl();
 
-        DriverManager.quitDriver();
-    }
+    System.out.println("Current URL: " + currentUrl);
+
+    assertTrue(currentUrl.contains("inventory"));
+
+    DriverManager.quitDriver();
+}
 }
