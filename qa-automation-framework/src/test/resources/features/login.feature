@@ -1,7 +1,7 @@
-Feature: Login
+Feature: Login functionality
 
 Scenario: Successful login
 
-Given user is on login page
-When user logs in with valid credentials
-Then user should see the dashboard
+Given user is on the login page
+When user enters valid username and password
+Then user should see the products page
