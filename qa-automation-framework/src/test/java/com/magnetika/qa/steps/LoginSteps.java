@@ -4,10 +4,12 @@ import io.cucumber.java.en.*;
 import com.magnetika.qa.utils.DriverManager;
 import com.magnetika.qa.pages.LoginPage;
 import static org.junit.Assert.assertTrue;
+import com.magnetika.qa.pages.InventoryPage;
 
 public class LoginSteps {
 
     LoginPage loginPage;
+    InventoryPage inventoryPage;
 
     @Given("user is on the login page")
     public void user_is_on_login_page() {
@@ -27,11 +29,13 @@ public class LoginSteps {
     @Then("user should see the products page")
 public void user_should_see_products_page() {
 
-    String currentUrl = DriverManager.driver.getCurrentUrl();
+    inventoryPage = new InventoryPage(DriverManager.driver);
 
-    System.out.println("Current URL: " + currentUrl);
+    boolean inventoryVisible = inventoryPage.isInventoryVisible();
 
-    assertTrue(currentUrl.contains("inventory"));
+    System.out.println("Inventory visible: " + inventoryVisible);
+
+    assertTrue(inventoryVisible);
 
     DriverManager.quitDriver();
 }
