@@ -1,22 +1,29 @@
 package com.magnetika.qa.utils;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverManager {
 
     public static WebDriver driver;
 
-    public static void initDriver() {
+    public static void initDriver(){
 
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
 
-        driver.manage().window().maximize();
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
+
+        driver = new ChromeDriver(options);
     }
 
-    public static void quitDriver() {
+    public static void quitDriver(){
 
         if(driver != null){
             driver.quit();
